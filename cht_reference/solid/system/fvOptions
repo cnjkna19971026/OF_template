@@ -1,0 +1,35 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Website:  www.openfoam.com                      |
+|   \\  /    A nd           |                                                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Define a heat source for the solid device
+heatSource
+{
+    type            scalarSemiImplicitSource;
+    active          true;
+
+    scalarSemiImplicitSourceCoeffs
+    {
+        // Select the volume to apply the source to.
+        // cellZone applies it to the entire 'deviceSolid' region.
+        volumeMode      cellZone;
+
+        // Which field to apply the source to. For CHT, it's enthalpy 'h'.
+        injectionRateSuSp
+        {
+            h (1e6 0); // (Constant part, Proportional part)
+        }
+    }
+}
