@@ -1,0 +1,10 @@
+
+blockMesh
+
+surfaceFeatureExtract
+
+snappyHexMesh -overwrite
+
+splitMeshRegions -cellZones -overwrite
+
+for i in $(foamListRegions); do changeDictionary -region $i; done

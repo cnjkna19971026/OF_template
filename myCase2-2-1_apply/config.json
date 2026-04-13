@@ -1,0 +1,43 @@
+{
+    "case_settings": {
+        "cores": 8,
+        "background_mesh_size": [0.1, 0.1, 0.05]
+    },
+    "components": [
+        {
+            "name": "PCB",
+            "stl_file": "PCB.stl",
+            "type": "solid",
+            "quality": "high",
+            "power_watts": 0
+        },
+        {
+            "name": "SOC",
+            "stl_file": "SOC.stl",
+            "type": "solid",
+            "quality": "high",
+            "power_watts": 20
+        },
+        {
+            "name": "fin",
+            "stl_file": "fin.stl",
+            "type": "solid",
+            "quality": "high",
+            "power_watts": 0
+        },
+        {
+            "name": "thermalpad",
+            "stl_file": "thermalpad.stl",
+            "type": "solid",
+            "quality": "standard",
+            "power_watts": 0
+        },
+        {
+            "name": "air_small",
+            "stl_file": "air_small.stl",
+            "type": "fluid",
+            "quality": "standard",
+            "power_watts": 0
+        }
+    ]
+}

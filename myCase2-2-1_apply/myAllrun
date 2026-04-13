@@ -1,0 +1,121 @@
+#!/bin/bash
+
+# --- CONFIGURATION ---
+SOLVER="chtMultiRegionSimpleFoam"
+PYTHON_SETUP="setup_case.py"
+PYTHON_BOUNDARIES="setup_boundaries.py"
+
+# --- FUNCTIONS ---
+print_header() {
+    echo "============================================================"
+    echo "   $1"
+    echo "============================================================"
+}
+
+check_error() {
+    if [ $? -ne 0 ]; then
+        echo "[ERROR] Process failed at step: $1"
+        exit 1
+    fi
+}
+
+# ------------------------------------------------------------------
+# STEP 1: CLEANUP
+# ------------------------------------------------------------------
+print_header "STEP 1: Cleaning Old Case Data"
+rm -rf 0
+rm -rf processor*
+rm -rf dynamicCode
+rm -rf constant/polyMesh
+rm -rf constant/*/polyMesh  # Clean region meshes
+rm -rf system/snappyHexMeshDict
+rm -rf system/decomposeParDict
+rm -rf *.log
+echo "Cleanup complete."
+
+# ------------------------------------------------------------------
+# STEP 2: PYTHON SETUP
+# ------------------------------------------------------------------
+print_header "STEP 2: Running Automation Scripts"
+
+if [ -f "$PYTHON_SETUP" ]; then
+    echo "Running $PYTHON_SETUP..."
+    python3 $PYTHON_SETUP
+    check_error "Python Setup"
+else
+    echo "Error: $PYTHON_SETUP not found!"
+    exit 1
+fi
+
+# ------------------------------------------------------------------
+# STEP 3: MESHING
+# ------------------------------------------------------------------
+print_header "STEP 3: Mesh Generation"
+
+echo "Running blockMesh..."
+blockMesh > log.blockMesh 2>&1
+check_error "blockMesh"
+
+echo "Running surfaceFeatureExtract..."
+surfaceFeatureExtract > log.surfaceFeatureExtract 2>&1
+# We don't check error here as it's optional if features are missing
+
+echo "Running snappyHexMesh (This may take a while)..."
+snappyHexMesh -overwrite > log.snappyHexMesh 2>&1
+check_error "snappyHexMesh"
+
+echo "Running splitMeshRegions..."
+# CRITICAL: -cellZones splits based on the volumes we defined
+splitMeshRegions -cellZones -overwrite > log.splitMeshRegions 2>&1
+check_error "splitMeshRegions"
+
+# ------------------------------------------------------------------
+# STEP 4: BOUNDARY & 0-FOLDER SETUP
+# ------------------------------------------------------------------
+print_header "STEP 4: Applying Boundary Conditions"
+
+if [ -f "$PYTHON_BOUNDARIES" ]; then
+    echo "Running $PYTHON_BOUNDARIES..."
+    python3 $PYTHON_BOUNDARIES
+    check_error "Boundary Setup"
+else
+    echo "Error: $PYTHON_BOUNDARIES not found!"
+    exit 1
+fi
+
+# ------------------------------------------------------------------
+# STEP 5: PARALLEL DECOMPOSITION
+# ------------------------------------------------------------------
+print_header "STEP 5: Decomposing Domain"
+
+# Auto-detect number of cores from the generated dictionary
+CORES=$(grep "numberOfSubdomains" system/decomposeParDict | tr -dc '0-9')
+echo "Detected Cores: $CORES"
+
+# CRITICAL: -allRegions is required for CHT
+decomposePar -allRegions > log.decomposePar 2>&1
+check_error "decomposePar"
+
+# ------------------------------------------------------------------
+# STEP 6: SOLVING
+# ------------------------------------------------------------------
+print_header "STEP 6: Running Solver ($SOLVER)"
+echo "Starting simulation on $CORES cores..."
+echo "Logs are being written to log.$SOLVER"
+
+mpirun -np $CORES $SOLVER -parallel > log.$SOLVER 2>&1
+check_error "Solver Execution"
+
+# ------------------------------------------------------------------
+# STEP 7: RECONSTRUCTION
+# ------------------------------------------------------------------
+print_header "STEP 7: Reconstructing Results"
+
+reconstructPar -allRegions > log.reconstructPar 2>&1
+check_error "reconstructPar"
+
+echo ""
+echo "============================================================"
+echo "   SIMULATION COMPLETE SUCCESS"
+echo "   Results ready for ParaView (run: paraFoam)"
+echo "============================================================"
