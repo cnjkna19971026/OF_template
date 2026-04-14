@@ -17,13 +17,13 @@ FoamFile
 
 numberOfSubdomains 4;
 
-method  assembly;
+method  scotch;
 
 coeffs
 {
     numberOfSubdomains 4;
     method      scotch;
-    dataFile    "cellDecompose.dat";
+    //dataFile    "cellDecompose.dat";
 }
 
 

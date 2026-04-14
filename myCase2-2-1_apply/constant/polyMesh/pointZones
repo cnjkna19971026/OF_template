@@ -8,7 +8,7 @@
 FoamFile
 {
     version     2.0;
-    format      ascii;
+    format      binary;
     arch        "LSB;label=32;scalar=64";
     class       regIOobject;
     location    "constant/polyMesh";

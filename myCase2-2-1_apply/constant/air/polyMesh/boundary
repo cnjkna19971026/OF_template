@@ -8,13 +8,14 @@
 FoamFile
 {
     version     2.0;
-    format      ascii;
+    format      binary;
     arch        "LSB;label=32;scalar=64";
     class       polyBoundaryMesh;
     location    "constant/air/polyMesh";
     object      boundary;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
 
 3
 (
@@ -24,26 +25,30 @@ FoamFile
         nFaces          288;
         startFace       8087;
     }
+
     air_to_soc
     {
         type            mappedWall;
-        inGroups        1(wall);
+        inGroups        1 ( wall );
         nFaces          108;
         startFace       8375;
         sampleMode      nearestPatchFace;
         sampleRegion    soc;
         samplePatch     soc_to_air;
     }
+
     air_to_board
     {
         type            mappedWall;
-        inGroups        1(wall);
+        inGroups        1 ( wall );
         nFaces          2598;
         startFace       8483;
         sampleMode      nearestPatchFace;
         sampleRegion    board;
         samplePatch     board_to_air;
     }
+
 )
+
 
 // ************************************************************************* //

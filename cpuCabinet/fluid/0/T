@@ -18,11 +18,22 @@ dimensions      [0 0 0 1 0 0 0];
 
 internalField   uniform 300;
 
+
+
+boundary
+{
+	defaultFaces
+	{
+		type wall;
+	}
+}
+
+
 boundaryField
 {
-     #includeEtc "caseDicts/setConstraintTypes"
+     //#includeEtc "caseDicts/setConstraintTypes"
 
-    FAN_SHROUD
+    ".*"
     {
         type            externalWallHeatFluxTemperature;
         kappaMethod     fluidThermo;
@@ -33,61 +44,7 @@ boundaryField
         kappaName       none;
     }
 
-    CABINET
-    {
-        type            externalWallHeatFluxTemperature;
-        kappaMethod     fluidThermo;
-        mode            flux;
-        Ta              $internalField;
-        q               uniform 0;
-        value           $internalField;
-        kappaName       none;
-    }
-
-    FINS
-    {
-        type            externalWallHeatFluxTemperature;
-        kappaMethod     fluidThermo;
-        mode            flux;
-        Ta              $internalField;
-        q               uniform 0;
-        value           $internalField;
-        kappaName       none;
-    }
-
-    PROCESSOR
-    {
-        type            externalWallHeatFluxTemperature;
-        kappaMethod     fluidThermo;
-        mode            flux;
-        Ta              $internalField;
-        q               uniform 0;
-        value           $internalField;
-        kappaName       none;
-    }
-
-    FAN
-    {
-        type            externalWallHeatFluxTemperature;
-        kappaMethod     fluidThermo;
-        mode            flux;
-        Ta              $internalField;
-        q               uniform 0;
-        value           $internalField;
-        kappaName       none;
-    }
-
-    MRF_region
-    {
-        type            externalWallHeatFluxTemperature;
-        kappaMethod     fluidThermo;
-        mode            flux;
-        Ta              $internalField;
-        q               uniform 0;
-        value           $internalField;
-        kappaName       none;
-    }
-
+	/*
     OUTLET_01
     {
         type            inletOutlet;
@@ -101,19 +58,9 @@ boundaryField
         inletValue      uniform 300;
         value           uniform 300;
     }
+	*/
 
-    domain0_to_v_CPU
-    {
-        type            compressible::turbulentTemperatureRadCoupledMixed;
-        qrNbr           none;
-        qr              none;
-        Tnbr            T;
-        kappaMethod     fluidThermo;
-        useImplicit     true;
-        value           $internalField;
-    }
-
-    domain0_to_v_fins
+    ".*_to_.*"
     {
         type            compressible::turbulentTemperatureRadCoupledMixed;
         Tnbr            T;

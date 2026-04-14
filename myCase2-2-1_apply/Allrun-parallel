@@ -31,6 +31,6 @@ runParallel $(getApplication)
 #runParallel foamToEnsight -allRegions
 
 # Reconstruct
-runApplication reconstructPar -allRegions
+# runApplication reconstructPar -allRegions
 
 #------------------------------------------------------------------------------

@@ -1,0 +1,103 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : v2412 OPENFOAM=2412 version=v2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : changeDictionary -region air
+Date   : Apr 14 2026
+Time   : 18:11:20
+Host   : AN990166144
+PID    : 16948
+I/O    : uncollated
+Case   : /home/oches/OF/gmsh_extension/upload/myCase2-2-1_apply
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh air for time = 0
+
+Read dictionary changeDictionaryDict with replacements for dictionaries 8(boundary T alphat epsilon k p_rgh p nut)
+Reading polyMesh/boundary file to extract patch names
+Loaded dictionary boundary with entries 3(defaultFaces air_to_soc air_to_board)
+Extracted patch groups:
+    group wall with patches 2(air_to_soc air_to_board)
+Replacing entries in dictionary boundary
+Special handling of boundary as polyMesh/boundary file.
+Merging entries from 1(defaultFaces)
+fieldDict:
+{
+    defaultFaces
+    {
+        type            wall;
+        nFaces          288;
+        startFace       8087;
+    }
+    air_to_soc
+    {
+        type            mappedWall;
+        inGroups        1 ( wall );
+        nFaces          108;
+        startFace       8375;
+        sampleMode      nearestPatchFace;
+        sampleRegion    soc;
+        samplePatch     soc_to_air;
+    }
+    air_to_board
+    {
+        type            mappedWall;
+        inGroups        1 ( wall );
+        nFaces          2598;
+        startFace       8483;
+        sampleMode      nearestPatchFace;
+        sampleRegion    board;
+        samplePatch     board_to_air;
+    }
+}
+
+Writing modified boundary
+Replacing entries in dictionary T
+Loading dictionary T
+Loaded dictionary T with entries 4(dimensions internalField boundary boundaryField)
+Merging entries from 3(procBoundary.* internalField boundaryField)
+Writing modified fieldDict T
+Replacing entries in dictionary alphat
+Loading dictionary alphat
+Loaded dictionary alphat with entries 3(dimensions internalField boundaryField)
+Merging entries from 3(procBoundary.* internalField boundaryField)
+Writing modified fieldDict alphat
+Replacing entries in dictionary epsilon
+Loading dictionary epsilon
+Loaded dictionary epsilon with entries 3(dimensions internalField boundaryField)
+Merging entries from 3(procBoundary.* internalField boundaryField)
+Writing modified fieldDict epsilon
+Replacing entries in dictionary k
+Loading dictionary k
+Loaded dictionary k with entries 3(dimensions internalField boundaryField)
+Merging entries from 3(procBoundary.* internalField boundaryField)
+Writing modified fieldDict k
+Replacing entries in dictionary p_rgh
+Loading dictionary p_rgh
+Loaded dictionary p_rgh with entries 3(dimensions internalField boundaryField)
+Merging entries from 3(procBoundary.* internalField boundaryField)
+Writing modified fieldDict p_rgh
+Replacing entries in dictionary p
+Loading dictionary p
+Loaded dictionary p with entries 3(dimensions internalField boundaryField)
+Merging entries from 3(procBoundary.* internalField boundaryField)
+Writing modified fieldDict p
+Replacing entries in dictionary nut
+Loading dictionary nut
+Loaded dictionary nut with entries 3(dimensions internalField boundaryField)
+Merging entries from 3(procBoundary.* internalField boundaryField)
+Writing modified fieldDict nut
+
+End
+
