@@ -22,6 +22,12 @@ boundaryField
 {
      //#includeEtc "caseDicts/setConstraintTypes"
 
+	defaultFaces
+	{
+		type epsilonWallFunction;
+		value uniform 10;
+	}
+
 	".*"
     {
         type            epsilonWallFunction;

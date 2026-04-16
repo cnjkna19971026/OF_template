@@ -20,29 +20,36 @@ internalField   uniform 300;
 
 
 
-boundary
-{
-	defaultFaces
-	{
-		type wall;
-	}
-}
+//boundary
+//{
+//	defaultFaces
+//	{
+//		type zeroGradient;
+//		uniform		300;
+//	}
+//}
 
 
 boundaryField
 {
      //#includeEtc "caseDicts/setConstraintTypes"
 
-    ".*"
-    {
-        type            externalWallHeatFluxTemperature;
-        kappaMethod     fluidThermo;
-        mode            flux;
-        Ta              $internalField;
-        q               uniform 0;
-        value           $internalField;
-        kappaName       none;
-    }
+	defaultFaces
+	{
+		type zeroGradient;
+		uniform		300;
+	}
+
+    //".*"
+    //{
+    //    type            externalWallHeatFluxTemperature;
+    //    kappaMethod     fluidThermo;
+    //    mode            flux;
+    //    Ta              $internalField;
+    //    q               uniform 0;
+    //    value           $internalField;
+    //    kappaName       none;
+    //}
 
 	/*
     OUTLET_01

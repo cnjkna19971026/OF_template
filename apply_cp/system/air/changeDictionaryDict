@@ -1,0 +1,293 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2412                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      changeDictionaryDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+boundary
+{
+    defaultFaces
+    {
+        type            wall;
+    }
+}
+
+
+T
+{
+    // THIS IS THE MAGIC LINE
+    //#includeEtc "caseDicts/setConstraintTypes"
+ 	"procBoundary.*"
+     {
+            type            processor;
+     }
+    internalField   uniform 300;
+    boundaryField
+    {
+        ".*"
+        {
+            type            zeroGradient;
+        }
+
+        "air_to_.*"
+        {
+            type            compressible::turbulentTemperatureRadCoupledMixed;
+            Tnbr            T;
+            kappaMethod     fluidThermo;
+            qrNbr           none;
+            qr              qr;
+            value           uniform 300;
+        }
+    }
+}
+
+alphat
+{
+    // THIS IS THE MAGIC LINE
+    //#includeEtc "caseDicts/setConstraintTypes"
+ 	"procBoundary.*"
+     {
+            type            processor;
+     }
+	
+	internalField   uniform 0.5;
+	boundaryField
+	{
+	     //#includeEtc "caseDicts/setConstraintTypes"
+	
+		".*"
+	    {
+	        type            compressible::alphatWallFunction;
+	        value           uniform 0;
+	    }
+	
+	
+		"air_to_.*"
+	    {
+	        type            compressible::alphatWallFunction;
+	        Prt             0.85;
+	        value           uniform 0;
+	    }
+	}
+}
+epsilon
+{
+    // THIS IS THE MAGIC LINE
+    //#includeEtc "caseDicts/setConstraintTypes"
+ 	"procBoundary.*"
+     {
+            type            processor;
+     }
+
+    internalField   uniform 0.01;
+    boundaryField
+    {
+        ".*"
+        {
+            type            epsilonWallFunction;
+            value           uniform 0.01;
+        }
+    }
+}
+
+k
+{
+
+    // THIS IS THE MAGIC LINE
+    //#includeEtc "caseDicts/setConstraintTypes"
+ 	"procBoundary.*"
+     {
+            type            processor;
+     }
+
+    internalField   uniform 0.1;
+    boundaryField
+    {
+        ".*"
+        {
+            type            kqRWallFunction;
+            value           uniform 0.1;
+        }
+    }
+}
+
+p_rgh
+{
+
+    // THIS IS THE MAGIC LINE
+    //#includeEtc "caseDicts/setConstraintTypes"
+ 	"procBoundary.*"
+     {
+            type            processor;
+     }
+
+    internalField   uniform 1e5;
+    boundaryField
+    {
+        ".*"
+        {
+            type            fixedFluxPressure;
+            value           uniform 1e5;
+        }
+    }
+}
+
+p
+{
+
+    // THIS IS THE MAGIC LINE
+    //#includeEtc "caseDicts/setConstraintTypes"
+ 	"procBoundary.*"
+     {
+            type            processor;
+     }
+
+    internalField   uniform 1e5;
+    boundaryField
+    {
+        ".*"
+        {
+            type            calculated;
+            value           uniform 1e5;
+        }
+    }
+}
+
+nut
+{
+
+    // THIS IS THE MAGIC LINE
+    //#includeEtc "caseDicts/setConstraintTypes"
+ 	"procBoundary.*"
+     {
+            type            processor;
+     }
+
+	internalField   uniform 0;
+	boundaryField
+	{
+	     //#includeEtc "caseDicts/setConstraintTypes"
+	
+		".*"
+	    {
+	        type            nutkWallFunction;
+	        value           $internalField;
+	    }
+	
+		/*
+	    OUTLET_01
+	    {
+	        type            calculated;
+	        value           $internalField;
+	    }
+	
+	    OUTLET_02
+	    {
+	        type            calculated;
+	        value           $internalField;
+	    }
+		*/
+	
+	    "air_to_.*"
+	    {
+	        type            nutkWallFunction;
+	        value           $internalField;
+	    }
+	
+	}
+}
+
+
+/*
+qr
+{
+
+    // THIS IS THE MAGIC LINE
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    internalField   uniform 0;
+    boundaryField
+    {
+        ".*"
+        {
+            type            greyDiffusiveRadiationViewFactor;
+            emissivityMode  lookup;
+            qro             uniform 0;
+            emissivity      uniform 1.0;
+            value           uniform 0;
+        }
+
+        "air_to_.*"
+        {
+            type            greyDiffusiveRadiationViewFactor;
+            emissivityMode  solidRadiation;
+            qro             uniform 0;
+            value           uniform 0;
+        }
+    }
+}
+
+G
+{
+
+    // THIS IS THE MAGIC LINE
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    internalField   uniform 0;
+    boundaryField
+    {
+        ".*"
+        {
+            type            MarshakRadiation;
+            emissivityMode  lookup;
+            emissivity      uniform 1.0;
+            value           uniform 0;
+        }
+
+        "air_to_.*"
+        {
+            type            MarshakRadiation;
+            emissivityMode  solidRadiation;
+            value           uniform 0;
+        }
+    }
+}
+
+IDefault
+{
+
+    // THIS IS THE MAGIC LINE
+    #includeEtc "caseDicts/setConstraintTypes"
+
+    internalField   uniform 0;
+    boundaryField
+    {
+        ".*"
+        {
+            type            greyDiffusiveRadiation;
+            emissivityMode  lookup;
+            emissivity      uniform 1.0;
+            value           uniform 0;
+        }
+
+        "air_to_.*"
+        {
+            type            greyDiffusiveRadiation;
+            emissivityMode  solidRadiation;
+            value           uniform 0;
+        }
+    }
+}
+*/
+
+// ************************************************************************* //

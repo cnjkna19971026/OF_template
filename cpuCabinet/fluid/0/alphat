@@ -21,6 +21,11 @@ internalField   uniform 0.5;
 boundaryField
 {
      //#includeEtc "caseDicts/setConstraintTypes"
+	
+	defaultFaces
+	{
+		type zeroGradient;
+	}
 
 	".*"
     {

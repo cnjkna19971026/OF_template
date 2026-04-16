@@ -22,6 +22,11 @@ boundaryField
 {
     //#includeEtc "caseDicts/setConstraintTypes"
 
+	defaultFaces
+	{
+		type zeroGradient;
+	}
+
     ".*"
     {
         type            zeroGradient;
