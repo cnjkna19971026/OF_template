@@ -36,8 +36,8 @@ def get_regions_from_mesh(case_dir, log_func):
 
     # --- Pre-defined Material Keywords ---
     FLUID_KEYWORDS =["air", "water", "fluid", "gas", "liquid", "coolant", "oil"]
-    SOLID_KEYWORDS =["steel", "copper", "aluminum", "board", "soc", "thermal", 
-                      "pad", "case", "solid", "heatsink", "fin", "pcb", "chip", 
+    SOLID_KEYWORDS =["steel", "copper", "aluminum", "board", "soc", "thermalpad", 
+                     "case", "solid", "heatsink", "fin", "pcb", "chip", 
                       "iron", "glass", "plastic"]
 
     for item in os.listdir(constant_path):
@@ -112,6 +112,8 @@ def deploy_template(template_dir, case_dir, region_name, region_type, log_func):
             with open(src_file, "r") as f:
                 content = f.read()
             content = content.replace("LOCATION_PLACEHOLDER", f"{folder}/{region_name}")
+            content = content.replace("FLUID_PLACEHOLDER", f"{region_name}")
+            content = content.replace("SOLID_PLACEHOLDER", f"{region_name}")
             with open(dest_file, "w") as f:
                 f.write(content)
 

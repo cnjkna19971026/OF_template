@@ -21,7 +21,7 @@ v_CPU_AbsoluteEnergySource
     active          true;
 
     selectionMode   cellZone;
-    cellZone        "SOLID_PLACEHOLDER";
+    cellZone        SOLID_PLACEHOLDER;
     volumeMode      absolute;
 
     sources

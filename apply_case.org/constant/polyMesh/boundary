@@ -21,8 +21,8 @@ FoamFile
     defaultFaces
     {
         type            patch;
-        nFaces          288;
-        startFace       18730;
+        nFaces          480;
+        startFace       1726;
     }
 )
 
