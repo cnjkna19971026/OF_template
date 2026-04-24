@@ -26,7 +26,7 @@ solvers
         relTol          0.05;
     }
 }
-
+/*
 SIMPLE
 {
     residualControl
@@ -34,6 +34,15 @@ SIMPLE
         default         1e-20;
     }
 }
+*/
+
+PIMPLE
+{
+
+	nNonOrthogonalCorrectors 0;
+
+}
+
 
 relaxationFactors
 {

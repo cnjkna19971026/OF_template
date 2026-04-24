@@ -45,6 +45,8 @@ solvers
     }
 }
 
+
+/*
 SIMPLE
 {
     momentumPredictor yes;
@@ -61,6 +63,22 @@ SIMPLE
    //     default         1e-7;
    // }
 }
+*/
+
+PIMPLE
+{
+	momentumPredictor on;
+	nCorrectors 		2;
+	nNonOrthogonalCorrectors 0;
+	pRefCell		0; //
+	pRefValue		100000;//
+	rhoMin			0.2;//
+	rhoMax			2;//
+
+
+}
+
+
 
 relaxationFactors
 {
