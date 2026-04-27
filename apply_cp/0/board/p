@@ -22,12 +22,13 @@ boundaryField
 {
      //#includeEtc "caseDicts/setConstraintTypes"
 
-	"board_to_.*"
+
+	".*"
     {
         type            zeroGradient;
     }
 
-	".*"
+	"board_to_.*"
     {
         type            zeroGradient;
     }

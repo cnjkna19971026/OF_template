@@ -1,0 +1,72 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : v2412 OPENFOAM=2412 version=v2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : changeDictionary -region board
+Date   : Apr 27 2026
+Time   : 15:48:56
+Host   : AN990166144
+PID    : 5750
+I/O    : uncollated
+Case   : /home/oches/OF/gmsh_extension/upload/apply_cp_test
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh board for time = 0
+
+Read dictionary changeDictionaryDict with replacements for dictionaries 2(boundary T)
+Reading polyMesh/boundary file to extract patch names
+Loaded dictionary boundary with entries 2(board_to_soc board_to_air)
+Extracted patch groups:
+    group wall with patches 2(board_to_soc board_to_air)
+Replacing entries in dictionary boundary
+Special handling of boundary as polyMesh/boundary file.
+Merging entries from 1(defaultFaces)
+--> FOAM Warning : 
+    From bool merge(bool, Foam::dictionary&, const Foam::dictionary&, bool, const Foam::HashTable<Foam::List<Foam::word> >&)
+    in file changeDictionary.C at line 303
+    Reading "system/board/changeDictionaryDict/boundary" at line 21
+    Ignoring non-existing entry defaultFaces
+fieldDict:
+{
+    board_to_soc
+    {
+        type            mappedWall;
+        inGroups        1 ( wall );
+        nFaces          68;
+        startFace       7285;
+        sampleMode      nearestPatchFace;
+        sampleRegion    soc;
+        samplePatch     soc_to_board;
+    }
+    board_to_air
+    {
+        type            mappedWall;
+        inGroups        1 ( wall );
+        nFaces          2598;
+        startFace       7353;
+        sampleMode      nearestPatchFace;
+        sampleRegion    air;
+        samplePatch     air_to_board;
+    }
+}
+
+Writing modified boundary
+Replacing entries in dictionary T
+Loading dictionary T
+Loaded dictionary T with entries 3(dimensions internalField boundaryField)
+Merging entries from 3(internalField procBoundary.* boundaryField)
+Writing modified fieldDict T
+
+End
+

@@ -21,16 +21,6 @@ internalField   uniform 300;
 boundaryField
 {
      //#includeEtc "caseDicts/setConstraintTypes"
-	".*_to_.*"
-    {
-        type            compressible::turbulentTemperatureRadCoupledMixed;
-        qrNbr           none;
-        qr              none;
-        Tnbr            T;
-        kappaMethod     solidThermo;
-        useImplicit     true;
-        value           $internalField;
-    }
 
 	".*"
     {
@@ -41,6 +31,17 @@ boundaryField
         q               uniform 0;
         value           $internalField;
         kappaName       none;
+    }
+
+	".*_to_.*"
+    {
+        type            compressible::turbulentTemperatureRadCoupledMixed;
+        qrNbr           none;
+        qr              none;
+        Tnbr            T;
+        kappaMethod     solidThermo;
+        useImplicit     true;
+        value           $internalField;
     }
 
 }

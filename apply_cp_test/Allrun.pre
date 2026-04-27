@@ -1,0 +1,27 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # Tutorial run functions
+#------------------------------------------------------------------------------
+
+#runApplication blockMesh
+#runApplication surfaceFeatureExtract
+#runApplication snappyHexMesh -overwrite
+#runApplication $decompDict decomposePar
+#runApplication decomposePar 
+# restore0Dir -processor
+#restore0Dir 
+
+#runApplication splitMeshRegions -cellZones -overwrite
+#runParallel splitMeshRegions -cellZones -overwrite
+#runParallel topoSet -region domain0
+
+for region in $(foamListRegions)
+do 
+	runApplication -s "$region" changeDictionary -region "$region"
+done
+
+# runApplication decomposePar -allRegions
+
+
+
+#------------------------------------------------------------------------------

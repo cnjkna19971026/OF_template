@@ -8,10 +8,10 @@
 Build  : v2412 OPENFOAM=2412 version=v2412
 Arch   : "LSB;label=32;scalar=64"
 Exec   : changeDictionary -region soc
-Date   : Apr 16 2026
-Time   : 17:18:26
+Date   : Apr 27 2026
+Time   : 17:44:39
 Host   : AN990166144
-PID    : 7760
+PID    : 10338
 I/O    : uncollated
 Case   : /home/oches/OF/gmsh_extension/upload/apply_cp
 nProcs : 1
