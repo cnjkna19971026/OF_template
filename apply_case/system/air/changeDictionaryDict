@@ -72,7 +72,7 @@ alphat
 	    }
 	
 	
-		".*_to_.*"
+		"air_to_.*"
 	    {
 	        type            compressible::alphatWallFunction;
 	        Prt             0.85;
@@ -198,7 +198,7 @@ nut
 	    }
 		*/
 	
-	    ".*_to_.*"
+	    "air_to_.*"
 	    {
 	        type            nutkWallFunction;
 	        value           $internalField;

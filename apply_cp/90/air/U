@@ -26,7 +26,22 @@ boundaryField
     {
         type            zeroGradient;
     }
+    air_to_case
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    air_to_bottom_case
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
     air_to_soc
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    air_to_thermalpad
     {
         type            fixedValue;
         value           uniform (0 0 0);

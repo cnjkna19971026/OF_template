@@ -28,7 +28,25 @@ boundaryField
         blending        stepwise;
         value           uniform 0.01;
     }
+    air_to_case
+    {
+        type            epsilonWallFunction;
+        blending        stepwise;
+        value           uniform 0.01;
+    }
+    air_to_bottom_case
+    {
+        type            epsilonWallFunction;
+        blending        stepwise;
+        value           uniform 0.01;
+    }
     air_to_soc
+    {
+        type            epsilonWallFunction;
+        blending        stepwise;
+        value           uniform 0.01;
+    }
+    air_to_thermalpad
     {
         type            epsilonWallFunction;
         blending        stepwise;

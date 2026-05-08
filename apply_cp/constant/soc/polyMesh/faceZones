@@ -13,9 +13,20 @@ FoamFile
     class       regIOobject;
     location    "constant/soc/polyMesh";
     object      faceZones;
+    meta
+    {
+        names           1 ( external_boundary );
+    }
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-0()
+1
+(external_boundary
+{
+    type            faceZone;
+    faceLabels      List<label> 0;
+    flipMap         List<bool> 0;
+}
+)
 
 // ************************************************************************* //

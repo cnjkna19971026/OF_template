@@ -26,6 +26,10 @@ boundaryField
     {
         type            zeroGradient;
     }
+    soc_to_thermalpad
+    {
+        type            zeroGradient;
+    }
     soc_to_air
     {
         type            zeroGradient;

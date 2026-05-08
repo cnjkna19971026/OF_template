@@ -1,0 +1,79 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    arch        "LSB;label=32;scalar=64";
+    class       polyBoundaryMesh;
+    location    "constant/air/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+6
+(
+    defaultFaces
+    {
+        type            wall;
+        nFaces          4440;
+        startFace       380885;
+    }
+    air_to_case
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          88010;
+        startFace       385325;
+        sampleMode      nearestPatchFace;
+        sampleRegion    case;
+        samplePatch     case_to_air;
+    }
+    air_to_bottomcase
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          45586;
+        startFace       473335;
+        sampleMode      nearestPatchFace;
+        sampleRegion    bottomcase;
+        samplePatch     bottomcase_to_air;
+    }
+    air_to_SOC
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          1204;
+        startFace       518921;
+        sampleMode      nearestPatchFace;
+        sampleRegion    SOC;
+        samplePatch     SOC_to_air;
+    }
+    air_to_thermalpad
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          240;
+        startFace       520125;
+        sampleMode      nearestPatchFace;
+        sampleRegion    thermalpad;
+        samplePatch     thermalpad_to_air;
+    }
+    air_to_board
+    {
+        type            mappedWall;
+        inGroups        1(wall);
+        nFaces          14990;
+        startFace       520365;
+        sampleMode      nearestPatchFace;
+        sampleRegion    board;
+        samplePatch     board_to_air;
+    }
+)
+
+// ************************************************************************* //

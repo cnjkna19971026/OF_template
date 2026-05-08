@@ -27,7 +27,19 @@ boundaryField
         type            calculated;
         value           uniform 100000;
     }
+    air_to_case
+    {
+        type            zeroGradient;
+    }
+    air_to_bottom_case
+    {
+        type            zeroGradient;
+    }
     air_to_soc
+    {
+        type            zeroGradient;
+    }
+    air_to_thermalpad
     {
         type            zeroGradient;
     }

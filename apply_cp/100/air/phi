@@ -29,7 +29,22 @@ boundaryField
         type            calculated;
         value           uniform 0;
     }
+    air_to_case
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    air_to_bottom_case
+    {
+        type            calculated;
+        value           uniform 0;
+    }
     air_to_soc
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    air_to_thermalpad
     {
         type            calculated;
         value           uniform 0;

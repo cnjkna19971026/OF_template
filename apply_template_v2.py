@@ -55,13 +55,24 @@ def fix_boundary_types(case_dir, regions, log_func):
     for region in regions:
         b_file = os.path.join(case_dir, "constant", region, "polyMesh", "boundary")
         if not os.path.exists(b_file):
+            log_func("  [Warning] No boundary file for region '{region}' ")
             continue
 
-        with open(b_file, 'r') as f:
+        with open(b_file, 'r' , encoding = 'utf-8') as f:
             lines = f.readlines()
 
+        current_path = ""
         changed = False
-        for i in range(len(lines)):
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            # capture patch name: a bare word followed by newline then '{'
+        if (stripped
+            and not stripped.startswith('//')
+            and '{' not in stripped
+            and '}' not in stripped
+            and ';' not in stripped
+            and not stripped[0].isdigit()):
+
             if "type" in lines[i] and "patch;" in lines[i]:
                 # Traverse upwards to find the boundary name
                 b_name = ""
@@ -71,15 +82,15 @@ def fix_boundary_types(case_dir, regions, log_func):
                             b_name = lines[j-1].strip()
                         break
 
-                # If it's not an inlet or outlet, it should be a wall!
-                b_name_lower = b_name.lower()
-                if "inlet" not in b_name_lower and "outlet" not in b_name_lower and "_to_" not in b_name_lower:
-                    lines[i] = lines[i].replace("patch;", "wall;")
-                    changed = True
-                    log_func(f"      [{region}] Converted boundary '{b_name}' to type wall.")
+               # # If it's not an inlet or outlet, it should be a wall!
+               # b_name_lower = b_name.lower()
+               # if "inlet" not in b_name_lower and "outlet" not in b_name_lower and "_to_" not in b_name_lower:
+               #     lines[i] = lines[i].replace("patch;", "wall;")
+               #     changed = True
+               #     log_func(f"      [{region}] Converted boundary '{b_name}' to type wall.")
 
         if changed:
-            with open(b_file, 'w') as f:
+            with open(b_file, 'w' , encoding = 'utf-8') as f:
                 f.writelines(lines)
 
 def deploy_template(template_dir, case_dir, region_name, region_type, log_func):
@@ -104,8 +115,6 @@ def deploy_template(template_dir, case_dir, region_name, region_type, log_func):
                 replacement_string = f'"{region_name}_to_.*"'
                 content = content.replace('".*_to_.*"', replacement_string)
                 log_func(f"      [{region_name}/{file_name}] Set up coupled boundary condition as {replacement_string}")
-            else :
-                log_func(f"no [ .*_to_.* ] in the openfoam init file ")
             # =================================================================
 
             content = content.replace("LOCATION_PLACEHOLDER", f"{folder}/{region_name}")

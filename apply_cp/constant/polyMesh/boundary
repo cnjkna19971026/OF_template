@@ -16,13 +16,20 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-1
+2
 (
+    external_boundary
+    {
+        type            patch;
+        physicalType    patch;
+        nFaces          0;
+        startFace       2175035;
+    }
     defaultFaces
     {
         type            patch;
-        nFaces          288;
-        startFace       18730;
+        nFaces          2426;
+        startFace       2175035;
     }
 )
 

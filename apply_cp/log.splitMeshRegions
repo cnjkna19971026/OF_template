@@ -1,0 +1,184 @@
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2412                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+Build  : v2412 OPENFOAM=2412 version=v2412
+Arch   : "LSB;label=32;scalar=64"
+Exec   : splitMeshRegions -cellZones -overwrite
+Date   : Apr 28 2026
+Time   : 10:52:48
+Host   : AN990166144
+PID    : 4472
+I/O    : uncollated
+Case   : /home/oches/OF/gmsh_extension/upload/apply_cp
+nProcs : 1
+trapFpe: Floating point exception trapping enabled (FOAM_SIGFPE).
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 5, maxFileModificationPolls 20)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+Creating single patch per inter-region interface.
+
+Trying to match regions to existing cell zones.
+
+
+Number of regions:6
+
+Writing region per cell file (for manual decomposition) to "/home/oches/OF/gmsh_extension/upload/apply_cp/constant/cellToRegion"
+
+Writing region per cell as volScalarField to "/home/oches/OF/gmsh_extension/upload/apply_cp/0/cellToRegion"
+
+Region	Cells
+------	-----
+0	189629
+1	114712
+2	2183
+3	4824
+4	23382
+5	753394
+
+Region	Zone	Name
+------	----	----
+0	(0)	case
+1	(1)	bottom_case
+2	(2)	thermalpad
+3	(3)	soc
+4	(4)	board
+5	(5)	air
+
+Sizes of interfaces between regions:
+
+Interface	Region	Region	Faces
+---------	------	------	-----
+0		0	5	76056
+1		3	4	1276
+2		1	5	40612
+3		2	3	542
+4		3	5	1174
+5		1	2	544
+6		0	4	160
+7		2	5	240
+8		4	5	13278
+
+Reading volScalarField: cellToRegion
+
+
+Adding patches
+
+
+Adding patches
+
+For interface between region case and air added patches
+    2	case_to_air
+    3	air_to_case
+For interface between region soc and board added patches
+    4	soc_to_board
+    5	board_to_soc
+For interface between region bottom_case and air added patches
+    6	bottom_case_to_air
+    7	air_to_bottom_case
+For interface between region thermalpad and soc added patches
+    8	thermalpad_to_soc
+    9	soc_to_thermalpad
+For interface between region soc and air added patches
+    10	soc_to_air
+    11	air_to_soc
+For interface between region bottom_case and thermalpad added patches
+    12	bottom_case_to_thermalpad
+    13	thermalpad_to_bottom_case
+For interface between region case and board added patches
+    14	case_to_board
+    15	board_to_case
+For interface between region thermalpad and air added patches
+    16	thermalpad_to_air
+    17	air_to_thermalpad
+For interface between region board and air added patches
+    18	board_to_air
+    19	air_to_board
+
+Region 0
+-------- 
+Creating mesh for region 0 case
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region0 points back to base mesh.
+Writing map faceRegionAddressing from region0 faces back to base mesh.
+Writing map cellRegionAddressing from region0 cells back to base mesh.
+Writing map boundaryRegionAddressing from region0 boundary back to base mesh.
+
+Region 1
+-------- 
+Creating mesh for region 1 bottom_case
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region1 points back to base mesh.
+Writing map faceRegionAddressing from region1 faces back to base mesh.
+Writing map cellRegionAddressing from region1 cells back to base mesh.
+Writing map boundaryRegionAddressing from region1 boundary back to base mesh.
+
+Region 2
+-------- 
+Creating mesh for region 2 thermalpad
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region2 points back to base mesh.
+Writing map faceRegionAddressing from region2 faces back to base mesh.
+Writing map cellRegionAddressing from region2 cells back to base mesh.
+Writing map boundaryRegionAddressing from region2 boundary back to base mesh.
+
+Region 3
+-------- 
+Creating mesh for region 3 soc
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region3 points back to base mesh.
+Writing map faceRegionAddressing from region3 faces back to base mesh.
+Writing map cellRegionAddressing from region3 cells back to base mesh.
+Writing map boundaryRegionAddressing from region3 boundary back to base mesh.
+
+Region 4
+-------- 
+Creating mesh for region 4 board
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region4 points back to base mesh.
+Writing map faceRegionAddressing from region4 faces back to base mesh.
+Writing map cellRegionAddressing from region4 cells back to base mesh.
+Writing map boundaryRegionAddressing from region4 boundary back to base mesh.
+
+Region 5
+-------- 
+Creating mesh for region 5 air
+Mapping fields
+Mapping field cellToRegion
+Deleting empty patches
+Writing new mesh
+Writing addressing to base mesh
+Writing map pointRegionAddressing from region5 points back to base mesh.
+Writing map faceRegionAddressing from region5 faces back to base mesh.
+Writing map cellRegionAddressing from region5 cells back to base mesh.
+Writing map boundaryRegionAddressing from region5 boundary back to base mesh.
+End
+

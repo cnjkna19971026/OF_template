@@ -18,11 +18,16 @@ FoamFile
 
 dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 1;
+internalField   uniform 3;
 
 boundaryField
 {
     soc_to_board
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    soc_to_thermalpad
     {
         type            calculated;
         value           uniform 0;

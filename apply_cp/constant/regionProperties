@@ -17,7 +17,7 @@ FoamFile
 
 regions
 (
-    solid ( board soc )
+    solid ( bottom_case board case soc thermalpad )
     fluid ( air )
 );
 

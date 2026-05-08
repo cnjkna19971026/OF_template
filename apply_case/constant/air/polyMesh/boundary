@@ -20,7 +20,7 @@ FoamFile
 (
     defaultFaces
     {
-        type            patch;
+        type            wall;
         nFaces          288;
         startFace       8087;
     }

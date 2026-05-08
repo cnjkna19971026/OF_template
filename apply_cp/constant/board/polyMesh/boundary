@@ -17,25 +17,36 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 
-2
+3
 (
     board_to_soc
     {
         type            mappedWall;
         inGroups        1 ( wall );
-        nFaces          68;
-        startFace       7285;
+        nFaces          1276;
+        startFace       39407;
         sampleMode      nearestPatchFace;
         sampleRegion    soc;
         samplePatch     soc_to_board;
+    }
+
+    board_to_case
+    {
+        type            mappedWall;
+        inGroups        1 ( wall );
+        nFaces          160;
+        startFace       40683;
+        sampleMode      nearestPatchFace;
+        sampleRegion    case;
+        samplePatch     case_to_board;
     }
 
     board_to_air
     {
         type            mappedWall;
         inGroups        1 ( wall );
-        nFaces          2598;
-        startFace       7353;
+        nFaces          13278;
+        startFace       40843;
         sampleMode      nearestPatchFace;
         sampleRegion    air;
         samplePatch     air_to_board;

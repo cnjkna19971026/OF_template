@@ -8,10 +8,10 @@
 Build  : v2412 OPENFOAM=2412 version=v2412
 Arch   : "LSB;label=32;scalar=64"
 Exec   : changeDictionary -region air
-Date   : Apr 27 2026
-Time   : 17:44:39
+Date   : Apr 28 2026
+Time   : 10:55:38
 Host   : AN990166144
-PID    : 10336
+PID    : 4494
 I/O    : uncollated
 Case   : /home/oches/OF/gmsh_extension/upload/apply_cp
 nProcs : 1
@@ -26,9 +26,9 @@ Create mesh air for time = 0
 
 Read dictionary changeDictionaryDict with replacements for dictionaries 8(boundary T alphat epsilon k p_rgh p nut)
 Reading polyMesh/boundary file to extract patch names
-Loaded dictionary boundary with entries 3(defaultFaces air_to_soc air_to_board)
+Loaded dictionary boundary with entries 6(defaultFaces air_to_case air_to_bottom_case air_to_soc air_to_thermalpad air_to_board)
 Extracted patch groups:
-    group wall with patches 2(air_to_soc air_to_board)
+    group wall with patches 5(air_to_case air_to_bottom_case air_to_soc air_to_thermalpad air_to_board)
 Replacing entries in dictionary boundary
 Special handling of boundary as polyMesh/boundary file.
 Merging entries from 1(defaultFaces)
@@ -37,25 +37,55 @@ fieldDict:
     defaultFaces
     {
         type            wall;
-        nFaces          288;
-        startFace       8087;
+        nFaces          2426;
+        startFace       1439895;
+    }
+    air_to_case
+    {
+        type            mappedWall;
+        inGroups        1 ( wall );
+        nFaces          76056;
+        startFace       1442321;
+        sampleMode      nearestPatchFace;
+        sampleRegion    case;
+        samplePatch     case_to_air;
+    }
+    air_to_bottom_case
+    {
+        type            mappedWall;
+        inGroups        1 ( wall );
+        nFaces          40612;
+        startFace       1518377;
+        sampleMode      nearestPatchFace;
+        sampleRegion    bottom_case;
+        samplePatch     bottom_case_to_air;
     }
     air_to_soc
     {
         type            mappedWall;
         inGroups        1 ( wall );
-        nFaces          108;
-        startFace       8375;
+        nFaces          1174;
+        startFace       1558989;
         sampleMode      nearestPatchFace;
         sampleRegion    soc;
         samplePatch     soc_to_air;
+    }
+    air_to_thermalpad
+    {
+        type            mappedWall;
+        inGroups        1 ( wall );
+        nFaces          240;
+        startFace       1560163;
+        sampleMode      nearestPatchFace;
+        sampleRegion    thermalpad;
+        samplePatch     thermalpad_to_air;
     }
     air_to_board
     {
         type            mappedWall;
         inGroups        1 ( wall );
-        nFaces          2598;
-        startFace       8483;
+        nFaces          13278;
+        startFace       1560403;
         sampleMode      nearestPatchFace;
         sampleRegion    board;
         samplePatch     board_to_air;

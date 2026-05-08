@@ -8,10 +8,10 @@
 Build  : v2412 OPENFOAM=2412 version=v2412
 Arch   : "LSB;label=32;scalar=64"
 Exec   : changeDictionary -region soc
-Date   : Apr 27 2026
-Time   : 17:44:39
+Date   : Apr 28 2026
+Time   : 10:55:38
 Host   : AN990166144
-PID    : 10338
+PID    : 4498
 I/O    : uncollated
 Case   : /home/oches/OF/gmsh_extension/upload/apply_cp
 nProcs : 1
@@ -26,9 +26,9 @@ Create mesh soc for time = 0
 
 Read dictionary changeDictionaryDict with replacements for dictionaries 2(boundary T)
 Reading polyMesh/boundary file to extract patch names
-Loaded dictionary boundary with entries 2(soc_to_board soc_to_air)
+Loaded dictionary boundary with entries 3(soc_to_board soc_to_thermalpad soc_to_air)
 Extracted patch groups:
-    group wall with patches 2(soc_to_board soc_to_air)
+    group wall with patches 3(soc_to_board soc_to_thermalpad soc_to_air)
 Replacing entries in dictionary boundary
 Special handling of boundary as polyMesh/boundary file.
 Merging entries from 1(defaultFaces)
@@ -43,18 +43,28 @@ fieldDict:
     {
         type            mappedWall;
         inGroups        1 ( wall );
-        nFaces          68;
-        startFace       584;
+        nFaces          1276;
+        startFace       8152;
         sampleMode      nearestPatchFace;
         sampleRegion    board;
         samplePatch     board_to_soc;
+    }
+    soc_to_thermalpad
+    {
+        type            mappedWall;
+        inGroups        1 ( wall );
+        nFaces          542;
+        startFace       9428;
+        sampleMode      nearestPatchFace;
+        sampleRegion    thermalpad;
+        samplePatch     thermalpad_to_soc;
     }
     soc_to_air
     {
         type            mappedWall;
         inGroups        1 ( wall );
-        nFaces          108;
-        startFace       652;
+        nFaces          1174;
+        startFace       9970;
         sampleMode      nearestPatchFace;
         sampleRegion    air;
         samplePatch     air_to_soc;
